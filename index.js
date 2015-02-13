@@ -43,6 +43,11 @@ io.on('connection', function(socket) {
   });
 
   socket.on('update object', function(object, index) {
+    if(object === undefined) {
+      console.log('error al recibir el objeto');
+      return;
+    }
+
     objectsServer[index].position.x = object.position.x;
     objectsServer[index].position.y = object.position.y;
     objectsServer[index].position.z = object.position.z;
@@ -50,6 +55,8 @@ io.on('connection', function(socket) {
     objectsServer[index].rotation._x = object.rotation._x;
     objectsServer[index].rotation._y = object.rotation._y;
     objectsServer[index].rotation._z = object.rotation._z;
+
+    objectsServer[index].color = {r:object.color.r, g:object.color.g, b:object.color.b}
 
     io.emit('update object', object, index);
   });
