@@ -12,9 +12,22 @@
     margin: 0px;
     overflow: hidden;
   }
+
+  #info {
+    position : absolute;
+    top : 10px;
+    width : 100%;
+    text-align : center;
+  }
   </style>
 </head>
 <body>
+
+  <div id="container">
+    <div id="info">
+      <a href="http://threejs.org" target="_blank">three.js</a> + <a href="http://socket.io/" target="_blank">socket.io</a> | webgl + websockets - draggable cubes
+      </div>
+  </div>
 
   <script src="js/jquery.js"></script>
   <script src="/socket.io/socket.io.js"></script>

@@ -31,8 +31,7 @@ $.get("connect", function(data) {
 });
 
 function init(boss) {
-  container = document.createElement('div');
-  document.body.appendChild(container);
+  container = document.getElementById('container');
 
   if (boss) {
     initBoss();
@@ -115,8 +114,6 @@ function initNormal() {
 function postInit() {
   container.appendChild( renderer.domElement );
 
-  addInfo();
-
   stats = new Stats();
   stats.domElement.style.position = 'absolute';
   stats.domElement.style.top = '0px';
@@ -127,16 +124,6 @@ function postInit() {
   renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
 
   window.addEventListener( 'resize', onWindowResize, false );
-}
-
-function addInfo() {
-  var info = document.createElement( 'div' );
-  info.style.position = 'absolute';
-  info.style.top = '10px';
-  info.style.width = '100%';
-  info.style.textAlign = 'center';
-  info.innerHTML = '<a href="http://threejs.org" target="_blank">three.js</a> + <a href="http://socket.io/" target="_blank">socket.io</a> | webgl + websockets - draggable cubes';
-  container.appendChild( info );
 }
 
 function onWindowResize() {
