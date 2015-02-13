@@ -1,4 +1,5 @@
-var scene;
+var scene, renderer, plane;
+var geometry = new THREE.BoxGeometry(40, 40, 40);
 
 function createScene() {
 	//Create the scene
@@ -25,4 +26,23 @@ function createScene() {
 	scene.add(light);
 }
 
+function createRenderer() {
+	plane = new THREE.Mesh(
+	    new THREE.PlaneBufferGeometry( 2000, 2000, 8, 8 ),
+	    new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.25, transparent: true } )
+	);
+	plane.visible = false;
+	scene.add( plane );
+
+	renderer = new THREE.WebGLRenderer( { antialias: true } );
+	renderer.setClearColor( 0xf0f0f0 );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.sortObjects = false;
+
+	renderer.shadowMapEnabled = true;
+	renderer.shadowMapType = THREE.PCFShadowMap;
+}
+
 createScene();
+createRenderer();
