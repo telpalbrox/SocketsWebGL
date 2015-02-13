@@ -7,6 +7,8 @@ var inited = false;
 var users = 0;
 var objectsServer;
 
+var port = 3000;
+
 app.use(express.static(__dirname + '/public'));
 
 app.get('/connect', function(req, res) {
@@ -25,6 +27,7 @@ app.get('/objects', function(req, res) {
 io.on('connection', function(socket) {
   console.log('a user connected');
   users++;
+
   socket.on('disconnect', function() {
     console.log('user disconnected');
     users--;
@@ -52,6 +55,6 @@ io.on('connection', function(socket) {
   });
 });
 
-http.listen(3000, function() {
-  console.log('litenig on *:3000');
+http.listen(port, function() {
+  console.log('Listening on port ' + port);
 });
