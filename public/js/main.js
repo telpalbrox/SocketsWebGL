@@ -40,13 +40,13 @@ function init(boss) {
     animate();
     socket.emit('update objects', objects2);
   } else {
-    initNormal();    
+    initNormal();
   }
 }
 
 function initBoss() {
   for ( var i = 0; i < 200; i ++ ) {
-    var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: 0xffffff } ) );
+    var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random()*0xffffff } ) );
 
     object.material.ambient = object.material.color;
 
@@ -71,7 +71,12 @@ function initBoss() {
     objects2.push({
       position : object.position,
       rotation : object.rotation,
-      scale : object.scale
+      scale : object.scale,
+      color : {
+        r : object.material.color.r,
+        g : object.material.color.g,
+        b: object.material.color.b
+      }
     });
   }
 }
@@ -80,7 +85,7 @@ function initNormal() {
   $.get( "objects", function(data) {
     objectsO = data;
     for(i in objectsO) {
-      var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: 0xffffff } ) );
+      var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: new THREE.Color(objectsO[i].color.r, objectsO[i].color.g, objectsO[i].color.b)  } ) );
       object.material.ambient = object.material.color;
 
       object.position.x = objectsO[i].position.x;
@@ -162,7 +167,7 @@ function onDocumentMouseMove( event ) {
 
   if ( intersects.length > 0 ) {
     if ( INTERSECTED != intersects[ 0 ].object ) {
-      if ( INTERSECTED ) { 
+      if ( INTERSECTED ) {
         INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
       }
 
@@ -219,7 +224,7 @@ function onDocumentMouseUp( event ) {
 
 function moveObjectEmit(object) {
   var index = objects.indexOf(object);
-  socket.emit('update object', {position:object.position, rotation:object.rotation}, index);
+  socket.emit('update object', {position:object.position, rotation:object.rotation, color: object.material.color}, index);
 }
 
 function animate() {
