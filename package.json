@@ -1,0 +1,9 @@
+{
+  "name": "socket-webgl-example",
+  "version": "0.1",
+  "description": "A webgl example socket connected",
+  "dependencies": {
+    "express": "^4.10.2",
+    "socket.io": "^1.3.2"
+  }
+}
