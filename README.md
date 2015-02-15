@@ -12,3 +12,5 @@ Install node dependencies
 ```
 npm install
 ```
+
+Open your browser and enter [http://localhost:3000](http://localhost:3000)
