@@ -7,7 +7,7 @@ var inited = false;
 var users = 0;
 var objectsServer;
 
-var port = 3000;
+var port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/public'));
 
@@ -33,7 +33,7 @@ io.on('connection', function(socket) {
     users--;
     if(users == 0) {
       inited = false;
-      objects = [];
+      objectsServer = [];
     }
   });
 
@@ -59,6 +59,17 @@ io.on('connection', function(socket) {
     objectsServer[index].color = {r:object.color.r, g:object.color.g, b:object.color.b};
     io.emit('update object', object, index);
   });
+
+  socket.on('create object', function(object) {
+    objectsServer.push(object);
+    io.emit('create object', object);
+  });
+
+  socket.on('delete object', function(index) {
+    objectsServer.splice(index, 1);
+    io.emit('delete object', index);
+  });
+
 });
 
 http.listen(port, function() {

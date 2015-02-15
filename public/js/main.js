@@ -16,6 +16,14 @@ socket.on('update object', function(object, index) {
   objects[index].rotation.set(object.rotation._x, object.rotation._y, object.rotation._z);
 });
 
+socket.on('create object', function(object, index) {
+  objects.push(object);
+});
+
+socket.on('delete object', function(index) {
+  objects.splice(index, 1);
+});
+
 /*$.get("connect", function(data) {
   boss = data;
   console.log('soy boss?: ' + data);
