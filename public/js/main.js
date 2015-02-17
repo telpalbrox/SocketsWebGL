@@ -1,12 +1,13 @@
 var container, stats;
 var objects = [];
-var objects2 = [];
 var socket = io();
 var boss;
 var actualizador;
 
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
+var lastMouse = new THREE.Vector2();
+var displacement = new THREE.Vector2();
 var offset = new THREE.Vector3();
 
 var INTERSECTED, SELECTED;
@@ -16,16 +17,6 @@ socket.on('update object', function(object, index) {
   objects[index].rotation.set(object.rotation._x, object.rotation._y, object.rotation._z);
 });
 
-/*$.get("connect", function(data) {
-  boss = data;
-  console.log('soy boss?: ' + data);
-  init(boss);
-  animate();
-  if (boss) {
-    socket.emit('update objects', objects2);
-  }
-});*/
-
 $.get("connect", function(data) {
   init(data);
 });
@@ -34,16 +25,18 @@ function init(boss) {
   container = document.getElementById('container');
 
   if (boss) {
-    initBoss();
+    var objectsToEmit = initBoss();
     postInit();
     animate();
-    socket.emit('update objects', objects2);
+    emitObjects(objectsToEmit);
   } else {
     initNormal();
   }
 }
 
 function initBoss() {
+  var objectsToEmit = [];
+
   for ( var i = 0; i < 200; i ++ ) {
     var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random()*0xffffff } ) );
 
@@ -64,10 +57,10 @@ function initBoss() {
     object.castShadow = true;
     object.receiveShadow = true;
 
-    scene.add( object );
-    objects.push( object );
+    scene.add(object);
+    objects.push(object);
 
-    objects2.push({
+    objectsToEmit.push({
       position : object.position,
       rotation : object.rotation,
       scale : object.scale,
@@ -78,6 +71,12 @@ function initBoss() {
       }
     });
   }
+
+  return objectsToEmit;
+}
+
+function emitObjects(objects) {
+  socket.emit('update objects', objects);
 }
 
 function initNormal() {
@@ -132,17 +131,29 @@ function onWindowResize() {
   renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
+function degreeToRads(degree) {
+  return degree*(Math.PI/180);
+}
+
 function onDocumentMouseMove( event ) {
   event.preventDefault();
 
+  //Guardamos el valor de la posición anterior del ratón
+  lastMouse.x = mouse.x;
+  lastMouse.y = mouse.y;
+
+  //Obtenemos la posición nueva
   mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
   mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+  //Obtenemos el desplazamiento (en porcentaje sobre 1)
+  displacement.x = mouse.x - lastMouse.x;
+  displacement.y = mouse.y - lastMouse.y;
 
   raycaster.setFromCamera( mouse, camera );
 
   if ( SELECTED ) {
     var intersects = raycaster.intersectObject( plane );
-
     if (!intersects[0]) return; //Quick, dirty fix
 
     SELECTED.position.copy( intersects[ 0 ].point.sub( offset ) );
@@ -162,7 +173,8 @@ function onDocumentMouseMove( event ) {
       INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
 
       plane.position.copy( INTERSECTED.position );
-      plane.lookAt( camera.position );
+      plane.lookAt( camera.position ); //El plano mira a la camara
+
     }
 
     container.style.cursor = 'pointer';

@@ -1,8 +1,8 @@
 var camera, controls;
 
 function createCamera() {
-	camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 10000);
-	camera.position.z = 1000;
+	camera = new THREE.PerspectiveCamera(15, window.innerWidth / window.innerHeight, 1, 10000);
+	camera.position.z = 3200;
 }
 
 function createControls() {
@@ -14,6 +14,10 @@ function createControls() {
 	controls.noPan = false;
 	controls.staticMoving = true;
 	controls.dynamicDampingFactor = 0.3;
+
+	renderer.shadowCameraNear = camera.near;
+	renderer.shadowCameraFar = camera.far;
+	renderer.shadowCameraFov = camera.fov;
 }
 
 createCamera();

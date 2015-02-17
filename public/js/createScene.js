@@ -9,13 +9,12 @@ function createScene() {
 	scene.add( new THREE.AmbientLight( 0x505050 ) );
 
 	//And now we add a directional light
-	var light = new THREE.SpotLight(0xffffff, 1.5);
-	light.position.set(0, 500, 2000);
+	var light = new THREE.DirectionalLight(0xffffff, 1.5);
 	light.castShadow = true;
 
-	light.shadowCameraNear = 200;
+	light.shadowCameraNear = camera.near;
 	light.shadowCameraFar = camera.far;
-	light.shadowCameraFov = 50;
+	light.shadowCameraFov = camera.fov;
 
 	light.shadowBias = -0.00022;
 	light.shadowDarkness = 0.5;
@@ -28,11 +27,11 @@ function createScene() {
 
 function createRenderer() {
 	plane = new THREE.Mesh(
-	    new THREE.PlaneBufferGeometry( 2000, 2000, 8, 8 ),
+	    new THREE.PlaneBufferGeometry( 5000, 5000, 8, 8 ),
 	    new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.25, transparent: true } )
 	);
 	plane.visible = false;
-	scene.add( plane );
+	scene.add(plane);
 
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
 	renderer.setClearColor( 0xf0f0f0 );
@@ -40,8 +39,8 @@ function createRenderer() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	renderer.sortObjects = false;
 
-	renderer.shadowMapEnabled = true;
-	renderer.shadowMapType = THREE.PCFShadowMap;
+	renderer.shadowMapEnabled = false;
+	renderer.shadowMapType = THREE.PCFSoftShadowMap;
 }
 
 createScene();
