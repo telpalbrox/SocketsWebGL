@@ -1,8 +1,8 @@
 #cssmenu {
   position: relative;
   height: 44px;
-  background: #2b2f3a;
-  opacity: 0.75;
+  background: #555961;
+  opacity: 0.90;
   width: auto;
 }
 #cssmenu ul {
@@ -14,7 +14,7 @@
 #cssmenu > ul {
   position: relative;
   display: block;
-  background: #2b2f3a;
+  background: #555961;
   width: 100%;
   z-index: 500;
 }
@@ -97,7 +97,7 @@
   height: 0;
   width: 100%;
   border: 12px solid transparent;
-  border-top-color: #2b2f3a;
+  border-top-color: #555961;
   z-index: -2;
   -webkit-transition: left .25s ease;
   -moz-transition: left .25s ease;
@@ -110,7 +110,7 @@
   height: 0;
   width: 100%;
   border: 12px solid transparent;
-  border-top-color: #2b2f3a;
+  border-top-color: #555961;
   top: -12px;
   right: 100%;
   z-index: -2;

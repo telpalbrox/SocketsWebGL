@@ -14,10 +14,6 @@ function createControls() {
 	controls.noPan = false;
 	controls.staticMoving = true;
 	controls.dynamicDampingFactor = 0.3;
-
-	renderer.shadowCameraNear = camera.near;
-	renderer.shadowCameraFar = camera.far;
-	renderer.shadowCameraFov = camera.fov;
 }
 
 createCamera();

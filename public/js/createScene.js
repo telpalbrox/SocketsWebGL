@@ -41,6 +41,10 @@ function createRenderer() {
 
 	renderer.shadowMapEnabled = false;
 	renderer.shadowMapType = THREE.PCFSoftShadowMap;
+
+	renderer.shadowCameraNear = camera.near;
+	renderer.shadowCameraFar = camera.far;
+	renderer.shadowCameraFov = camera.fov;
 }
 
 createScene();
