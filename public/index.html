@@ -5,28 +5,37 @@
   <title>three.js +socket.io | webgl + websockets - draggable cubes</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-  <style>
-  body {
-    font-family: Monospace;
-    background-color: #f0f0f0;
-    margin: 0px;
-    overflow: hidden;
-  }
-
-  #info {
-    position : absolute;
-    top : 10px;
-    width : 100%;
-    text-align : center;
-  }
-  </style>
+  <link rel="stylesheet" href="css/stylesdrop.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
   <div id="container">
     <div id="info">
-      <a href="http://threejs.org" target="_blank">three.js</a> + <a href="http://socket.io/" target="_blank">socket.io</a> | webgl + websockets - draggable cubes
+      <div id='cssmenu'>
+        <ul>
+          <li><a href='#'><span>Test1</span></a></li>
+          <li class='active has-sub'><a href='#'><span>Test2</span></a>
+            <ul>
+              <li class='has-sub'><a href='#'><span>Test2Sub1</span></a>
+                <ul>
+                  <li><a href='#'><span>Test2Sub1Sub1</span></a></li>
+                  <li class='last'><a href='#'><span>Test2Sub1Sub2</span></a></li>
+                </ul>
+              </li>
+              <li class='has-sub'><a href='#'><span>Test2Sub2</span></a>
+                <ul>
+                  <li><a href='#'><span>Test2Sub2Sub1</span></a></li>
+                  <li class='last'><a href='#'><span>Test2Sub2Sub2</span></a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href='#'><span>Test3</span></a></li>
+          <li class='last'><a href='#'><span>Test4</span></a></li>
+        </ul>
       </div>
+    </div>
   </div>
 
   <script src="js/jquery.js"></script>
@@ -39,5 +48,9 @@
   <script src="js/createScene.js"></script>
   <script src="js/main.js"></script>
 
+  <script src="js/scriptDrop.js"></script>
+
+  <script>
+  </script>
 </body>
 </html>
