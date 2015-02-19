@@ -1,3 +1,4 @@
+console.log("loading server...");
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -57,17 +58,25 @@ io.on('connection', function(socket) {
     objectsServer[index].rotation._z = object.rotation._z;
 
     objectsServer[index].color = {r:object.color.r, g:object.color.g, b:object.color.b};
-    io.emit('update object', object, index);
+
+    getConnectedIds(socket.id, function(soketid) {
+      io.sockets.connected[soketid].emit('update object', object, index);
+    });
+
   });
 
   socket.on('create object', function(object) {
     objectsServer.push(object);
-    io.emit('create object', object);
+    getConnectedIds(socket.id, function(soketid) {
+      io.sockets.connected[soketid].emit('create object', object);
+    });
   });
 
   socket.on('delete object', function(index) {
     objectsServer.splice(index, 1);
-    io.emit('delete object', index);
+    getConnectedIds(socket.id, function(soketid) {
+        io.sockets.connected[soketid].emit('delete object', index);
+    })
   });
 
 });
@@ -75,3 +84,12 @@ io.on('connection', function(socket) {
 http.listen(port, function() {
   console.log('Listening on port ' + port);
 });
+
+function getConnectedIds(clientId, callback) {
+      for(var i in io.sockets.connected) {
+      if(io.sockets.connected[i].id == clientId) {
+        continue;
+      }
+      callback(io.sockets.connected[i].id);
+    }
+}

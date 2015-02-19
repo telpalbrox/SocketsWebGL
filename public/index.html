@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
   <link rel="stylesheet" href="css/stylesdrop.css">
+  <link rel="stylesheet" href="css/spectrum.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -20,7 +21,7 @@
               <li class='has-sub'><a href='#'><span>Test2Sub1</span></a>
                 <ul>
                   <li><a href='#'><span>Test2Sub1Sub1</span></a></li>
-                  <li class='last'><a href='#'><span>Test2Sub1Sub2</span></a></li>
+                  <li class='last'><a href='#'><input type='color' name='color' id="custom" /></a></li>
                 </ul>
               </li>
               <li class='has-sub'><a href='#'><span>Test2Sub2</span></a>
@@ -49,8 +50,11 @@
   <script src="js/main.js"></script>
 
   <script src="js/scriptDrop.js"></script>
-
+  <script src="js/spectrum.js"></script>
   <script>
+  $('#custom').change(function(color) {
+    console.log(this.value);
+  });
   </script>
 </body>
 </html>
