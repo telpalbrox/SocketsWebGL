@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1024" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>impress.js | presentation tool based on the power of CSS3 transforms and transitions in modern browsers | by Bartek Szopka @bartaz</title>
+
+  <meta name="description" content="impress.js is a presentation tool based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com." />
+  <meta name="author" content="Bartek Szopka" />
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+  <link href="css/impress-demo.css" rel="stylesheet" />
+
+  <link rel="shortcut icon" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body class="impress-not-supported">
+  <div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+  </div>
+  <div id="impress">
+    <div id="intro" class="step slide" data-x="-1000" data-y="-1500">
+      <h1>Presentacion lenguaje de marcas</h1>
+      <p>
+        WebSockets + WebGL
+      </p>
+    </div>
+    <div class="step slide" data-x="0" data-y="-1500">
+      <h2>Introducción</h2>
+      <p>
+        Vamos a hablar sobre WebSockets y WebGL. Nuestro proyecto ha consistido en a partir de un ejemplo hecho en WebGL implementar sockets para que el ejemplo se pueda retransmitir en tiempo real a muchos navegadores a la vez.
+      </p>
+    </div>
+    <div class="step slide" data-x="1500" data-y="-1500" data-scale="2">
+      <h1>Sockets</h1>
+      <p>
+        Empezaré hablando sobre sockets y como los he implementado en el navegador y servidor con el lenguaje javascript.
+      </p>
+    </div>
+    <div class="step slide" data-x="3750" data-y="-500" data-scale="3" data-rotate="90">
+      <h2>¿Qué es un socket?</h2>
+      <p>
+        Según Wikipedia:
+      </p>
+      <p>
+        Socket designa un concepto abstracto por el cual dos programas (posiblemente situados en computadoras distintas) pueden intercambiar cualquier flujo de datos, generalmente de manera fiable y ordenada.
+      </p>
+    </div>
+    <div class="step slide" data-x="3750" data-y="-500" data-z="-4500" data-scale="4" data-rotate="90">
+      <h2>¿Qué quiere decir esto?</h2>
+      <p>
+        Pues básicamente un socket es como un túnel que enlaza varias instancias de tu programa. Todo lo que introduzcas en el socket puede llegar a todos los clientes. El socket garantiza que llegará bien y de forma ordenada.
+      </p>
+    </div>
+    <div class="step slide" data-x="1250" data-y="1500" data-z="0" data-scale="3" data-rotate="180">
+      <h2>¿Por qué usar sockets en el navegador?</h2>
+      <p>
+        Los sockets son necesarios principalmente cuando se necesita una comunicación en tiempo real y de baja latencia.
+      </p>
+      <p>
+        Se suelen usar para juegos multijugador, chats, actualizaciones en tiempo real,  etc...
+      </p>
+    </div>
+    <div class="step slide" data-x="-2000" data-y="1500" data-z="0" data-scale="3" data-rotate="180">
+      <h2>¿Cómo se usan los sockets en el navegador?</h2>
+      <p>
+        En el navegador los sockets están implementados a través de WebSockets. Este tipo de sockets están implementados sobre un único socket TCP que puede enviar y recibir datos de forma simultánea.
+      </p>
+      <p>
+        Para usarlos en el navegador HTML 5 dispone de una API que incluye los  WebSockets y que se puede usar a través de Javascript.
+      </p>
+      <p>
+        En nuestro caso vamos a usar una librería llamada Socket.io que funciona sobre la API de HTML 5 en JavaScript.
+      </p>
+    </div>
+    <div class="step slide" data-x="-2000" data-y="4000" data-scale="3">
+      <h2>¿Cómo se implementan los WebSockets de lado del servidor?</h2>
+      <p>
+        El socket del navegador necesita conectarse a un servidor para ir enviando y recibiendo los distintos mensajes. Generalmente este servidor es el mismo que le proporciona la página web.
+      </p>
+      <p>
+        En el lado de servidor hay muchas más opciones. Hay librerías disponibles para los principales lenguajes de programación: JavaScript, Java, .NET, PHP, Python, Ruby, etc.
+      </p>
+      <p>
+        En mi caso elegí la librería Socket.io para JavaScript que está implementada sobre Node.js.
+      </p>
+    </div>
+    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+    </div>
+
+  </div>
+  <div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+  </div>
+  <script>
+  if ("ontouchstart" in document.documentElement) {
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+  }
+  </script>
+  <script src="js/impress.js"></script>
+  <script>impress().init();</script>
+
+</body>
+</html>
