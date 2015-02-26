@@ -290,8 +290,28 @@ a:focus {
   background-image: url(../img/quienes.png);
 }
 
+#graficos {
+  background-image: url(../img/webgl2.png);
+}
+
+#webgl {
+  background-image: url(../img/webgl3.jpg);
+}
+
+#wegldif {
+  background-image: url(../img/webgl4.jpg);
+}
+
 #tecnologias {
   background-image: url(../img/tecnologias.png);
+}
+
+#three {
+  background-image: url(../img/three.png);
+}
+
+#implementacion {
+  background-image: url(../img/flujo.png);
 }
 
 #overview { display: none }

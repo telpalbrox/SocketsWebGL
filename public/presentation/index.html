@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=1024" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>impress.js | presentation tool based on the power of CSS3 transforms and transitions in modern browsers | by Bartek Szopka @bartaz</title>
+  <title>Presentación WebSockets + WebGL</title>
 
   <meta name="description" content="impress.js is a presentation tool based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com." />
   <meta name="author" content="Bartek Szopka" />
@@ -96,19 +96,82 @@
         Según su página oficial la <b>versión web de Microsfot Office</b> y el servicio de organicación <b>Trello</b> usan socket.io a parte de otros muchos servicios menos conocidos como Yammer o Zendesk.
       </p>
     </div>
-    <div id="tecnologias" class="step slide back-image-center" data-x="4750" data-y="4000" data-scale="4">
+    <div id="graficos" class="step slide back-image" data-x="4500" data-y="3500" data-scale="3" data-rotate="330">
+      <h2>Gráficos</h2>
+      <p>
+        En esta parte de la presentación vamos a explicar que tecnologías usa la parte gráfica del prototipo.
+      </p>
+    </div>
+    <div id="webgl" class="step slide back-image" data-x="6500" data-y="1000" data-scale="3" data-rotate="270">
+      <h2>WebGL</h2>
+      <p>
+        Para poder dibujar gráficos en 3D en navegadores web es nesario usar WebGL.
+      </p>
+      <p>
+        WebGL es una especificación estándar para mostrar gráficos 3D en navegadores web accelerados por hardware (GPU).
+      </p>
+      <p>
+        Técnicamente es una API para JavaScript que permite usar la implementación nativa de OpenGL ES 2.0.
+      </p>
+    </div>
+    <div id="wegldif" class="step slide back-image-center" data-x="6500" data-y="-1500" data-scale="2" data-rotate="270">
+      <h2>Problema WebGL</h2>
+      <p>
+        El principal problema de WebGL es que es una tecnología diseñada para trabajar directamente con la GPU por lo que es muy difícil trabajar directamente sobre WebGL.
+      </p>
+    </div>
+    <div id="three" class="step slide back-image" data-x="9000" data-y="-1500" data-scale="2">
+      <h2>Three.js</h2>
+      <p>
+        Como es muy difícil trabajr directamente sobre WebGL es necesario usar una librería que nos abstraiga de WebGL.
+      </p>
+      <p>
+        En nuestro caso hemos elegido Three.js por ser una de las más populares.
+      </p>
+    </div>
+    <div id="elaboracion" class="step slide back-image" data-x="9000" data-y="250" data-scale="2">
+      <h2>Elaboración del prototipo</h2>
+      <p>
+        Para comenzar la elaboración del prototipo elegimos basarnos en un ejemplo de la página de Three.js.
+      </p>
+      <p>
+        Hicimos esta elección para no tener que empezar de 0 y poder dedicarnos a añdir más cosas e implementar los sockets.
+      </p>
+      <p>
+        En primer lugar estudiamos como estaba elaborado el ejemplo y luego decidimos como implementar los sockets.
+      </p>
+      <p>
+        A continuación reestructuramos el prototipo y corregimos algunos bugs.
+      </p>
+      <p>
+        Por último implementamos los sockets, lo mejoramos visualmente y añadimos algunos extras como el menú.
+      </p>
+    </div>
+    <div id="tecnologias" class="step slide back-image-center" data-x="9000" data-y="2000" data-scale="2">
       <h2>Tecnologías del prototipo</h2>
       <p>
         Esta imagen muestra las tecnologías que se han usado para realizar el prototipo.
       </p>
     </div>
-    <div id="fin" class="step slide back-image-center" data-x="6000" data-y="4000" data-z="-10000" data-rotate="1080" data-scale="5">
+    <div id="implementacion" class="step slide back-image-center" data-x="9000" data-y="3750" data-scale="2">
+      <h2>Funcionamiento prototipo</h2>
+    </div>
+    <div id="fin" class="step slide back-image-center" data-x="6000" data-y="4000" data-z="-100000" data-rotate="1080" data-scale="10">
       <h1>Fin presentación Sockets</h1>
+      <p>
+        Todo el código del prototipo y esta presentación están en GitHub.
+      </p>
       <p>
         Espero que no os hayáis mareado mucho.
       </p>
+      <p>
+        Presentación realizada con impress.js
+      </p>
+      <p>
+        ¿Alguna duda?
+      </p>
     </div>
-    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="11">
     </div>
 
   </div>
