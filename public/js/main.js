@@ -26,8 +26,25 @@ var porcentaje = 0;
 var creciendo = true;
 
 socket.on('update object', function(object, index) {
-  objects[index].position.set(object.position.x, object.position.y, object.position.z);
-  objects[index].rotation.set(object.rotation._x, object.rotation._y, object.rotation._z);
+  var cubeToUpdate = objects[index];
+
+  cubeToUpdate.position.set(object.position.x, object.position.y, object.position.z);
+  cubeToUpdate.rotation.set(object.rotation._x, object.rotation._y, object.rotation._z);
+});
+
+socket.on('change object color', function(object, index) {
+  var cubeToUpdate = objects[index];
+
+  //check if the one changed is the selected
+  if (changeColor && objects.indexOf(changeColor) == index) {
+    originalR = object.r;
+    originalG = object.g;
+    originalB = object.b;
+  } else {
+    cubeToUpdate.material.color.r = object.r;
+    cubeToUpdate.material.color.g = object.g;
+    cubeToUpdate.material.color.b = object.b;
+  }
 });
 
 socket.on('create object', function(object, index) {
@@ -35,7 +52,17 @@ socket.on('create object', function(object, index) {
 });
 
 socket.on('delete object', function(index) {
+  var toRemove = objects[index];
+  scene.remove(toRemove);  
   objects.splice(index, 1);
+
+  //check if the one deleted is the selected
+  if (changeColor && objects.indexOf(changeColor) == -1) {
+    //Reseteamos variables
+    changeColor = false;
+    porcentaje = 0;
+    creciendo = true;
+  }
 });
 
 $.get("connect", function(data) {
@@ -223,8 +250,8 @@ function onDocumentMouseDown( event ) {
 
     changeColor = false; //clean erase color
 
-    var porcentaje = 0;
-    var creciendo = true;
+    porcentaje = 0;
+    creciendo = true;
   }
 
   if ( intersects.length > 0 ) {

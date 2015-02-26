@@ -57,12 +57,23 @@ io.on('connection', function(socket) {
     objectsServer[index].rotation._y = object.rotation._y;
     objectsServer[index].rotation._z = object.rotation._z;
 
-    objectsServer[index].color = { r:object.color.r, g:object.color.g, b:object.color.b };
-
     getConnectedIds(socket.id, function(soketid) {
       io.sockets.connected[soketid].emit('update object', object, index);
     });
 
+  });
+
+  socket.on('change object color', function(object, index) {
+    if(object === undefined) {
+      console.log('error al recibir el objeto');
+      return;
+    }
+
+    objectsServer[index].color = { r: object.r, g: object.g, b: object.b };
+
+    getConnectedIds(socket.id, function(soketid) {
+      io.sockets.connected[soketid].emit('change object color', object, index);
+    });
   });
 
   socket.on('create object', function(object) {
