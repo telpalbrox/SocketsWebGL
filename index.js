@@ -57,7 +57,7 @@ io.on('connection', function(socket) {
     objectsServer[index].rotation._y = object.rotation._y;
     objectsServer[index].rotation._z = object.rotation._z;
 
-    objectsServer[index].color = {r:object.color.r, g:object.color.g, b:object.color.b};
+    objectsServer[index].color = { r:object.color.r, g:object.color.g, b:object.color.b };
 
     getConnectedIds(socket.id, function(soketid) {
       io.sockets.connected[soketid].emit('update object', object, index);

@@ -12,6 +12,19 @@ var offset = new THREE.Vector3();
 
 var INTERSECTED, SELECTED;
 
+//Change color vars
+var changeColor = false; //cube
+var originalR;
+var originalG;
+var originalB;
+
+var actual = (new Date()).getTime();
+var antiguo;
+var tiempoPasado; //Tiempo pasado, en milisegundos, desde el último frame
+var tiempoCambio = 1000; //Tiempo, en milisegundos, que tarda en cambiar el color
+var porcentaje = 0;
+var creciendo = true;
+
 socket.on('update object', function(object, index) {
   objects[index].position.set(object.position.x, object.position.y, object.position.z);
   objects[index].rotation.set(object.rotation._x, object.rotation._y, object.rotation._z);
@@ -203,16 +216,31 @@ function onDocumentMouseDown( event ) {
   var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
   var intersects = raycaster.intersectObjects( objects );
 
+  if (changeColor) {
+    changeColor.material.color.r = originalR;
+    changeColor.material.color.g = originalG;
+    changeColor.material.color.b = originalB;
+
+    changeColor = false; //clean erase color
+
+    var porcentaje = 0;
+    var creciendo = true;
+  }
+
   if ( intersects.length > 0 ) {
     controls.enabled = false;
 
     SELECTED = intersects[ 0 ].object;
+    changeColor = SELECTED; // Cube to change color
+
+    originalR = SELECTED.material.color.r;
+    originalG = SELECTED.material.color.g;
+    originalB = SELECTED.material.color.b;
 
     var intersects = raycaster.intersectObject( plane );
     offset.copy( intersects[ 0 ].point ).sub( plane.position );
 
     container.style.cursor = 'move';
-
   }
 }
 
@@ -240,7 +268,45 @@ function animate() {
   stats.update();
 }
 
+function functChangeColor() {
+  changeColor.material.color.r = originalR + porcentaje;
+  changeColor.material.color.g = originalG + porcentaje;
+  changeColor.material.color.b = originalB + porcentaje;    
+}
+
+function functUpdateColor() {
+  tiempoPasado = actual - antiguo;
+
+  if (creciendo) {
+    porcentaje += tiempoPasado / tiempoCambio;
+    functChangeColor();
+
+    if (porcentaje > 0.999) {
+      creciendo = false;
+      return;
+    }
+  } else {
+    porcentaje -= tiempoPasado / tiempoCambio;
+    functChangeColor();
+
+    if (porcentaje < 0.001) {
+      creciendo = true;
+      return;
+    }
+  }
+}
+
 function render() {
+  //Get time
+  antiguo = actual;
+  actual = (new Date()).getTime();
+
+  //update color
+  if (changeColor) {
+    functUpdateColor();
+  }
+
+  //update rest
   controls.update();
-  renderer.render( scene, camera );
+  renderer.render( scene, camera );  
 }
