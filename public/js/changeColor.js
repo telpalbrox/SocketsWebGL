@@ -31,6 +31,41 @@ function deleteCube() {
 	}
 }
 
+function addCube() {
+	var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random()*0xffffff } ) );
+
+    object.material.ambient = object.material.color;
+
+    object.position.x = Math.random() * 1000 - 500;
+    object.position.y = Math.random() * 600 - 300;
+    object.position.z = Math.random() * 800 - 400;
+
+    object.rotation.x = Math.random() * 2 * Math.PI;
+    object.rotation.y = Math.random() * 2 * Math.PI;
+    object.rotation.z = Math.random() * 2 * Math.PI;
+
+    object.scale.x = Math.random() * 2 + 1;
+    object.scale.y = Math.random() * 2 + 1;
+    object.scale.z = Math.random() * 2 + 1;
+
+    object.castShadow = true;
+    object.receiveShadow = true;
+
+    scene.add(object);
+    objects.push(object);
+
+    socket.emit('create object', {
+      position : object.position,
+      rotation : object.rotation,
+      scale : object.scale,
+      color : {
+        r : object.material.color.r,
+        g : object.material.color.g,
+        b: object.material.color.b
+      }
+    });
+}
+
 function hexToRgbInt(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {

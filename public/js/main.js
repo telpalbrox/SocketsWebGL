@@ -1,3 +1,5 @@
+var INITIAL_NUM_CUBES = 1;
+
 var container, stats;
 var objects = [];
 var socket = io();
@@ -47,8 +49,27 @@ socket.on('change object color', function(object, index) {
   }
 });
 
-socket.on('create object', function(object, index) {
-  objects.push(object);
+socket.on('create object', function(object) {
+  var cube = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: new THREE.Color(object.color.r, object.color.g, object.color.b)  } ) );
+  cube.material.ambient = cube.material.color;
+
+  cube.position.x = object.position.x;
+  cube.position.y = object.position.y;
+  cube.position.z = object.position.z;
+
+  cube.rotation.x = object.rotation._x;
+  cube.rotation.y = object.rotation._y;
+  cube.rotation.z = object.rotation._z;
+
+  cube.scale.x = object.scale.x;
+  cube.scale.y = object.scale.y;
+  cube.scale.z = object.scale.z;
+
+  cube.castShadow = true;
+  cube.receiveShadow = true;
+
+  scene.add(cube);
+  objects.push(cube);
 });
 
 socket.on('delete object', function(index) {
@@ -85,7 +106,7 @@ function init(boss) {
 function initBoss() {
   var objectsToEmit = [];
 
-  for ( var i = 0; i < 200; i ++ ) {
+  for ( var i = 0; i < INITIAL_NUM_CUBES; i ++ ) {
     var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random()*0xffffff } ) );
 
     object.material.ambient = object.material.color;
