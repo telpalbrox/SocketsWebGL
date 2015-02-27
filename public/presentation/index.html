@@ -33,13 +33,13 @@
     <div id="intro2" class="step slide" data-x="0" data-y="-1500">
       <h2>Introducción</h2>
       <p>
-        Vamos a hablar sobre <b class="websockets">WebSockets</b> y <b class="webgl">WebGL</b>. Nuestro proyecto ha consistido en a partir de un ejemplo hecho en WebGL implementar sockets para que el ejemplo se pueda retransmitir en tiempo real a muchos navegadores a la vez.
+        Vamos a hablar sobre <b class="websockets">WebSockets</b> y <b class="webgl">WebGL</b>. Nuestro proyecto ha consistido en, a partir de un pequeño prototipo hecho en WebGL, implementar mucha funcionalidad extra y sockets para que este prototipo se pueda retransmitir en tiempo real a muchos navegadores a la vez.
       </p>
     </div>
     <div id="javascript" class="step slide back-image" data-x="1500" data-y="-1500" data-scale="2">
       <h1>Sockets</h1>
       <p>
-        Empezaré hablando sobre sockets y como los he implementado en el navegador y servidor con el lenguaje <b>javascript</b>.
+        Empezaré hablando sobre sockets y cómo los hemos implementado en el navegador y servidor con el lenguaje <b>JavaScript</b>.
       </p>
     </div>
     <div id="socket1" class="step slide back-image" data-x="3750" data-y="-500" data-scale="3" data-rotate="90">
@@ -63,7 +63,7 @@
         Los sockets son necesarios principalmente cuando se necesita una <b>comunicación en tiempo real</b> y de baja latencia.
       </p>
       <p>
-        Se suelen usar para juegos multijugador, chats, actualizaciones en tiempo real,  etc...
+        Se suelen usar para juegos multijugador, chats, actualizaciones en tiempo real, etcétera.
       </p>
     </div>
     <div id="websockets" class="step slide back-image" data-x="-2000" data-y="1500" data-z="0" data-scale="3" data-rotate="180">
@@ -72,10 +72,10 @@
         En el navegador los sockets están implementados a través de <b>WebSockets</b>. Este tipo de sockets están implementados sobre un único socket TCP que puede enviar y recibir datos de forma simultánea.
       </p>
       <p>
-        Para usarlos en el navegador HTML 5 dispone de una API que incluye los WebSockets y que se puede usar a través de JavaScript.
+        Para usarlos en el navegador, HTML 5 dispone de una API que incluye los WebSockets y que se puede usar a través de JavaScript.
       </p>
       <p>
-        En nuestro caso vamos a usar una librería llamada <b>Socket.io</b> que funciona sobre la API de HTML 5 en JavaScript.
+        En nuestro caso vamos a usar una librería llamada <b>Socket.io</b> que funciona sobre la API de HTML 5 en JavaScript y que simplifica considerablemente la tarea.
       </p>
     </div>
     <div id="server-side" class="step slide back-image" data-x="-2000" data-y="4000" data-scale="3">
@@ -84,10 +84,10 @@
         El socket del navegador necesita conectarse a un servidor para ir enviando y recibiendo los distintos mensajes. Este servidor puede ser el mismo que le proporciona la página web al navegador.
       </p>
       <p>
-        En el lado de servidor <b>hay muchas</b> más <b>opciones</b>. Hay librerías disponibles para los principales lenguajes de programación: JavaScript, Java, .NET, PHP, Python, Ruby, etc.
+        En el lado de servidor <b>hay muchas</b> más <b>opciones</b>. Hay librerías disponibles para los principales lenguajes de programación: JavaScript, Java, .NET, PHP, Python, Ruby, etcétera.
       </p>
       <p>
-        En mi caso elegí la librería <b>Socket.io</b> para JavaScript que está implementada sobre Node.js.
+        En nuestro caso, como comentábamos anteriormente, se ha elegido la librería <b>Socket.io</b> para JavaScript que está implementada sobre Node.js.
       </p>
     </div>
     <div id="quien-usa" class="step slide back-image" data-x="1250" data-y="4000" data-scale="3">
@@ -111,13 +111,13 @@
         WebGL es una especificación estándar para mostrar gráficos 3D en navegadores web accelerados por hardware (GPU).
       </p>
       <p>
-        Técnicamente es una API para JavaScript que permite usar la implementación nativa de OpenGL ES 2.0.
+        Técnicamente es una API para JavaScript que permite usar la implementación nativa de OpenGL ES 2.0, y en algunos navegadores hasta OpenGL ES 3.0.
       </p>
     </div>
     <div id="wegldif" class="step slide back-image-center" data-x="6500" data-y="-1500" data-scale="2" data-rotate="270">
       <h2>Problema WebGL</h2>
       <p>
-        El principal problema de WebGL es que es una tecnología diseñada para trabajar directamente con la GPU por lo que es muy difícil trabajar directamente sobre WebGL.
+        El principal problema de WebGL es que es una tecnología diseñada para trabajar directamente con la GPU, por lo que es muy difícil trabajar directamente sobre WebGL.
       </p>
     </div>
     <div id="three" class="step slide back-image" data-x="9000" data-y="-1500" data-scale="2">
@@ -132,19 +132,19 @@
     <div id="elaboracion" class="step slide back-image" data-x="9000" data-y="250" data-scale="2">
       <h2>Elaboración del prototipo</h2>
       <p>
-        Para comenzar la elaboración del prototipo elegimos basarnos en un ejemplo de la página de Three.js.
+        Para comenzar la elaboración del prototipo elegimos basarnos en un prototipo de la página de Three.js.
       </p>
       <p>
-        Hicimos esta elección para no tener que empezar de 0 y poder dedicarnos a añdir más cosas e implementar los sockets.
+        Hicimos esta elección para no tener que empezar de 0 y poder dedicarnos a añadir más cosas e implementar los sockets. Sin embargo comentar que el código se ha reescrito prácticamente por completo.
       </p>
       <p>
-        En primer lugar estudiamos como estaba elaborado el ejemplo y luego decidimos como implementar los sockets.
+        En primer lugar estudiamos cómo estaba elaborado el ejemplo y luego decidimos como implementar los sockets.
       </p>
       <p>
-        A continuación reestructuramos el prototipo y corregimos algunos bugs.
+        A continuación reestructuramos el prototipo y corregimos numerosos bugs.
       </p>
       <p>
-        Por último implementamos los sockets, lo mejoramos visualmente y añadimos algunos extras como el menú.
+        Por último implementamos los sockets, lo mejoramos visualmente y añadimos algunos extras como el menú, cambiar el color, añadir cubos o eliminarlos.
       </p>
     </div>
     <div id="tecnologias" class="step slide back-image-center" data-x="9000" data-y="2000" data-scale="2">
