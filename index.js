@@ -5,8 +5,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 var inited = false;
-var users = 0;
-var objectsServer;
+//var users = 0;
+var objectsServer = [];
 
 var port = process.env.PORT || 3000;
 
@@ -27,15 +27,9 @@ app.get('/objects', function(req, res) {
 
 io.on('connection', function(socket) {
   console.log('a user connected');
-  users++;
 
   socket.on('disconnect', function() {
     console.log('user disconnected');
-    users--;
-    if(users == 0) {
-      inited = false;
-      objectsServer = [];
-    }
   });
 
   socket.on('update objects', function(objects) {

@@ -86,69 +86,13 @@ socket.on('delete object', function(index) {
   }
 });
 
-$.get("connect", function(data) {
-  init(data);
+$.get("connect", function() {
+  init();
 });
 
-function init(boss) {
+function init() {
   container = document.getElementById('container');
 
-  if (boss) {
-    var objectsToEmit = initBoss();
-    postInit();
-    animate();
-    emitObjects(objectsToEmit);
-  } else {
-    initNormal();
-  }
-}
-
-function initBoss() {
-  var objectsToEmit = [];
-
-  for ( var i = 0; i < INITIAL_NUM_CUBES; i ++ ) {
-    var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random()*0xffffff } ) );
-
-    object.material.ambient = object.material.color;
-
-    object.position.x = Math.random() * 1000 - 500;
-    object.position.y = Math.random() * 600 - 300;
-    object.position.z = Math.random() * 800 - 400;
-
-    object.rotation.x = Math.random() * 2 * Math.PI;
-    object.rotation.y = Math.random() * 2 * Math.PI;
-    object.rotation.z = Math.random() * 2 * Math.PI;
-
-    object.scale.x = Math.random() * 2 + 1;
-    object.scale.y = Math.random() * 2 + 1;
-    object.scale.z = Math.random() * 2 + 1;
-
-    object.castShadow = true;
-    object.receiveShadow = true;
-
-    scene.add(object);
-    objects.push(object);
-
-    objectsToEmit.push({
-      position : object.position,
-      rotation : object.rotation,
-      scale : object.scale,
-      color : {
-        r : object.material.color.r,
-        g : object.material.color.g,
-        b: object.material.color.b
-      }
-    });
-  }
-
-  return objectsToEmit;
-}
-
-function emitObjects(objects) {
-  socket.emit('update objects', objects);
-}
-
-function initNormal() {
   $.get( "objects", function(data) {
     objectsO = data;
     for(i in objectsO) {
